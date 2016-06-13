@@ -6,3 +6,4 @@ cache/
 public/js/main.js
 public/css
 .DS_Store
+.idea/
