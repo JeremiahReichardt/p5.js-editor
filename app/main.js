@@ -31,7 +31,8 @@ var appConfig = {
     sidebar: require('./sidebar/index'),
     settings: require('./settings/index'),
     debug: require('./debug/index'),
-    tabs: require('./tabs/index')
+    tabs: require('./tabs/index'),
+    viewer: require('./viewer/index')
   },
 
   data: {
@@ -301,7 +302,7 @@ var appConfig = {
       }).on('change', function(path) {
         if (Files.find(self.files, path).open === true) {
           if (self.justSaved) {
-            self.justSaved = false; 
+            self.justSaved = false;
           } else {
             console.log(path);
             if (!self.temp) self.askReload = true;
@@ -381,7 +382,7 @@ var appConfig = {
       });
     },
 
-   
+
 
     saveFile: function() {
       // if this is a new project then trigger a save-as
@@ -446,12 +447,12 @@ var appConfig = {
         }
       }
     },
-    
+
     closeFile: function(path){
         // check to see if there are unsaved files
          var file = Files.find(this.files, path);
         if (!file) return false;
-        
+
 
         if(this.tabs.length==1){
             var win = gui.Window.get();
@@ -464,7 +465,7 @@ var appConfig = {
         }
         if (shouldClose) {
           file.open = false;
-          file.contents = file.lastSavedContents; 
+          file.contents = file.lastSavedContents;
           this.$broadcast('close-file', file);
           return true;
         }

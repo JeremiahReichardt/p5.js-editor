@@ -3,13 +3,10 @@ var Path = nodeRequire('path');
 var os = nodeRequire('os');
 var fs = nodeRequire('fs');
 var request = nodeRequire('request');
+var cp = nodeRequire('child_process');
+var $ = require('jquery');
+
 var Files = require('../../files');
-
-
-var canvasWidth;
-var canvasHeight;
-var prevCanvasWidth;
-var prevCanvasHeight;
 
 module.exports = {
   newProject: function() {
@@ -108,81 +105,35 @@ module.exports = {
   },
 
   run: function() {
-    var self = this;
-    this.saveAll();
-    gui.App.clearCache();
-
-    if (this.outputWindow) {
-      if ((String(self.settings.runInBrowser) == "true")) {
-        gui.Shell.openExternal(url);
-      } else {
-        this.outputWindow.reloadIgnoringCache();
-        if(isWin){
-          self.outputWindow.hide();
-          self.outputWindow.show();
-        }
-      }
-    } else {
-      startServer(this.projectPath, this, function(url) {
-        if ((String(self.settings.runInBrowser) === "true")) {
-          gui.Shell.openExternal(url);
-        } else {
-          fs.readFile(Path.join(self.projectPath, 'sketch.js'), function(err, data){
-            var matches = (""+data).match(/createCanvas\((.*),(.*)\)/);
-            canvasWidth = matches && matches[1] ? +matches[1] : 400;
-            canvasHeight = matches && matches[2] ? +matches[2] : 400;
-
-            if (!self.outW) self.outW = canvasWidth;
-            if (!self.outH) self.outH = canvasHeight;
-
-            if ((canvasWidth != prevCanvasWidth || canvasHeight != prevCanvasHeight) && !self.resizedOutputWindow) {
-              self.outW = canvasWidth;
-              self.outH = canvasHeight;
-            }
-
-            self.outputWindow = self.newWindow(url, {
-              toolbar: true,
-              'inject-js-start': 'js/debug-console.js',
-              x: self.outX,
-              y: self.outY,
-              width: self.outW,
-              height: self.outH,
-              nodejs: false,
-              'page-cache': false,
-            });
-
-            prevCanvasWidth = canvasWidth;
-            prevCanvasHeight = canvasHeight;
-
-            self.outputWindow.on('document-start', function(){
-              self.outputWindow.show();
-            });
-
-            self.outputWindow.on("close", function(){
-              self.outX = self.outputWindow.x;
-              self.outY = self.outputWindow.y;
-              self.outW = self.outputWindow.width;
-
-              // the "-55" appears to fix the growing window issue,
-              // & resulting gasslighting of myself
-              self.outH = self.outputWindow.height - 55;
-              self.running = false;
-              self.outputWindow = null;
-              this.close(true);
-            });
-
-            self.outputWindow.on('focus', function(){
-              self.resetMenu();
-            });
-
-            self.outputWindow.on('resize', function() {
-              self.resizedOutputWindow = true;
-            });
-          });
-        }
-        self.running = true;
-      });
+    if ( this.running ) {
+      return;
     }
+    this.running = true;
+
+    this.saveAll();
+    gui.App.clearCache(); // TODO: what does this do?
+
+    // create the child process
+    this.child = cp.fork(Path.join('mode_assets', 'gulpfile.js'), [], {});
+
+    // send it a config object to start
+    this.child.send({
+      base: this.projectPath,
+      entry: Path.join(this.projectPath, 'sketch.js')
+    });
+
+    // add a call back
+    this.child.on('message', function(m) {
+      if ( m.slice(0,8) === 'P5_EVENT' ) {
+        if ( m.indexOf( 'P5_EVENT_URL' ) === 0 ) {
+          var url = m.split('P5_EVENT_URL').join('');
+          document.getElementById('viewer-iframe').src = url;
+          //gui.Window.get().showDevTools('viewer-iframe');
+        }
+      } else {
+        $('#debug').html( m + '<br>');
+      }
+    });
   },
 
   stop: function() {

@@ -1,7 +1,7 @@
-function setup() {
+window.setup = function () {
   
-}
+};
 
-function draw() {
-  
-}
+window.draw = function() {
+
+};

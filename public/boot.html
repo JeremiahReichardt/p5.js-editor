@@ -1,7 +1,7 @@
 <html>
 
 <script type="text/javascript">
-  
+
 var gui = require('nw.gui');
 var fs = require('fs');
 var Path = require('path');
@@ -50,14 +50,14 @@ function openProject(path) {
 
   var win = gui.Window.open('index.html', winSettings);
   win.on('document-start', function(){
-    win.window.PATH = path; 
+    win.window.PATH = path;
   });
 }
 
 
 if (gui.App.argv.length > 0) {
   openProject(gui.App.argv[0]);
-} 
+}
 
 
 if (gui.App.argv.length === 0 && windowsToOpen.length === 0) {
