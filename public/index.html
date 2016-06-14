@@ -5,7 +5,7 @@
   <title>{{title}} {{currentFile.contents !== currentFile.lastSavedContents ? '*' : ''}}</title>
   <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="{{orientation}}">
+<body>
   <div id="header-container">
     <img id="logo" src="images/p5-logo.png">
     <button class="button" id="play" v-class="running: $root.running" v-on="click: $root.toggleRun()"></button>

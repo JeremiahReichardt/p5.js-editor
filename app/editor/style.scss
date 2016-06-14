@@ -132,7 +132,7 @@ variable */
 
 
 
-body.horizontal {
+body {
   div#editor-container {
     flex-direction: column;
   }
@@ -170,11 +170,11 @@ body.horizontal {
 }
 
 .ace_search_form .ace_search_field {
-  top: 51px !important; 
+  top: 51px !important;
 }
 
 .ace_replace_form .ace_search_field {
-  top: 131px !important; 
+  top: 131px !important;
 }
 
 .ace_search_field {

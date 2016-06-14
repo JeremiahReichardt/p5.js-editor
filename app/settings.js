@@ -3,7 +3,6 @@ var defaults = {
   tabSize: 2,
   tabType: 'spaces',
   theme: 'tomorrow',
-  consoleOrientation: 'horizontal',
   showSidebar: false,
   wordWrap: false,
   runInBrowser: false

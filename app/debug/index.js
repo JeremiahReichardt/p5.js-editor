@@ -8,21 +8,12 @@ module.exports = {
   template: require('./template.html'),
 
   data: {
-    orientation: undefined,
     debugWidth: undefined
   },
 
   methods: {
 
     startDrag: function(e) {
-      if ($('body').hasClass('horizontal')) {
-        this.horizonatlDrag(e);
-      } else {
-        this.verticalDrag(e);
-      }
-    },
-
-    horizonatlDrag: function(e) {
       var container = $('#debug-container');
       var startY = e.clientY;
       var startHeight = container.height();
@@ -54,29 +45,6 @@ module.exports = {
       });
     },
 
-    checkSize: function(value) {
-      if (this.orientation != value.consoleOrientation) {
-        this.orientation = value.consoleOrientation;
-        var container = $('#debug-container');
-        if (this.orientation === 'vertical') {
-          container.css({
-            width: this.debugWidth.toString() + "px",
-            height: 'auto'
-          });
-          $('.prompt-label').css('margin-left', '8px');
-          $('.console-label').css('margin-left', '5px');
-
-        } else {
-          container.css({
-            width: 'auto',
-            height: this.debugWidth > $('#editor-container').height() ? "100px" : this.debugWidth.toString() + "px"
-          });
-          $('.prompt-label').css('margin-left', '25px');
-          $('.console-label').css('margin-left', '23px');
-        }
-      }
-    },
-
     debugOut: function(data) {
       var msg = data.msg;//.replace(/\\"/g, '"');
       var style = data.style;
@@ -97,8 +65,6 @@ module.exports = {
   },
 
   ready: function() {
-    this.orientation = this.$root.settings.consoleOrientation;
-    this.$on('settings-changed', this.checkSize);
     var container = $('#debug-container');
     this.debugWidth = container.width();
     var self = this;

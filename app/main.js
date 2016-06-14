@@ -57,11 +57,6 @@ var appConfig = {
   computed: {
     projectName: function() {
       return Path.basename(this.projectPath);
-    },
-
-    orientation: function(){
-     var orientation = this.settings.consoleOrientation;
-     return orientation;
     }
   },
 
