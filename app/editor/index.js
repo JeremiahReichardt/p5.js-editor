@@ -1,5 +1,5 @@
 var Path = nodeRequire('path');
-
+var $ = require('jquery');
 var _ = require('underscore');
 var Files = require('../files');
 var beautify = require('js-beautify').js_beautify;
@@ -151,6 +151,8 @@ module.exports = {
       });
 
     }
+
+
 
   }
 };
