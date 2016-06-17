@@ -128,11 +128,10 @@ module.exports = {
       if ( m.slice(0,8) === 'P5_EVENT' ) {
         if ( m.indexOf( 'P5_EVENT_URL' ) === 0 ) {
           var url = m.split('P5_EVENT_URL').join('');
-
-          if ((String(self.settings.runInBrowser) == "true")) {
-            gui.Shell.openExternal(url);
-          }
           document.getElementById('viewer-iframe').src = url;
+
+
+
         }
       } else {
         $('#debug').html( m + '<br>');
