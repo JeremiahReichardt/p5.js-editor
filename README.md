@@ -1,8 +1,13 @@
+## This fork intends to...
+* Add browserify because 'Browserify lets you `require('modules')` in the browser by bundling up all of your dependencies.' - [browserify.org](http://browserify.org/). Or allows easy use of more than one javascript file.
+* Use Browsersync because 'Time-saving synchronised browser testing.' - [browsersync.io](https://www.browsersync.io/) Live editing / reloading of code.
+* View your sketch next to your code, no need to another window.
+
 ## p5.js Editor: a code editor designed for p5.js
 
-The p5.js Editor is a simple coding environment designed for new programmers to get started with p5.js. It's modeled off of the Processing editor, and intended to provide a similar experience.
+The p5.js Editor is a simple coding environment designed for new programmers to get started with p5.js. It's modeled off of the Processing editor, and intended to provide a similar experience ( with some additions ).
 
-![p5.js Editor Screenshot](http://i.imgur.com/fabBKO3.png)
+![p5.js Editor Screenshot](http://i.imgur.com/ZZT4Oir.png)
 
 ### Features
 * Code editor with syntax highlighting that supports javascript, p5.js syntax, html and css.
@@ -10,19 +15,19 @@ The p5.js Editor is a simple coding environment designed for new programmers to 
 * Automatically updates new releases of p5.js and add-on libraries
 * Runs sketches inside the editor or in the browser
 * Starts a local server for the user
-* Provides a basic logging console
+* Provides a real logging console
 
 ### Future Plans
-* Linux version
 * Integrated p5.js documentation
-* Update sketches live
+* Server URL displayed for external browsers
+* Hiding of preview panel
+* Various key commands such as switching tabs, or closing current tab
 
 ### Download
 To get started, [download the editor here](https://github.com/processing/p5.js-editor/releases/latest), and visit [p5js.org](http://p5js.org) for more info on p5.js.
 
 ## Development
 
-If you're interested in contributing to the development of the editor, check out our issues page, or email [Sam Lavigne](mailto:lavigne@saaaam.com).
 
 When you're ready to get started, follow the direction below:
 
@@ -33,7 +38,7 @@ When you're ready to get started, follow the direction below:
 
 ### Setup
 
-1. Clone this repo: `git clone https://github.com/processing/p5.js-editor`
+1. Clone this repo: `git clone https://github.com/JeremiahReichardt/p5.js-editor`
 2. Enter the repo directory and install the development modules: `npm
    install`
 3. Install secondary modules: `cd public` and then `npm install`
@@ -55,7 +60,7 @@ Below you'll find documentation for the different libraries we're using
 
 ### Building
 
-Just run the gulp task: 
+Just run the gulp task:
 `gulp build`
 
 This will build Mac and Windows versions of the editor, and place them in `dist/`. Please note that due to an issue with file path lengths (to be fixed, evidently in the next version of npm), Mac users may run into an issue building the Windows version. To fix this install and run `flatten-packages`:
