@@ -66,31 +66,33 @@ body {
 
 #header-container {
   height: 44px;
-  margin-top: 30px;
-  margin-left: 102px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 #logo {
-  height: 43px;
+  height: 25px;
   float: left;
-  margin-right: 25px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #play {
   background: none;
-  background-image: url('../images/play-button.svg');
+  background-image: url("../images/play-button.svg");
   border: 0;
-  width: 44px;
-  height: 44px;
-  font-size: 25px;
+  width: 30px;
+  height: 30px;
   display: inline;
-  outline: 0; 
+  outline: 0;
   float: left;
+  margin-top: 6px;
 
   &.running {
     background-image: url('../images/stop-button.svg');
   }
-}  
+}
 
 #settings {
   width: 44px;
@@ -99,11 +101,11 @@ body {
 
 #project-name {
   font-size: 12px;
-  padding-left: 20px;
+  padding-left: 15px;
   color: #b5b5b5;
   margin-top: 14px;
   margin-bottom: 10px;
-  cursor: default; 
+  cursor: default;
   float:left;
 }
 
@@ -114,7 +116,7 @@ body {
 }
 
 #actions {
-  
+
   #add, #export {
     float: left;
   }
