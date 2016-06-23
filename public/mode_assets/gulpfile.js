@@ -36,7 +36,6 @@ process.on('message', function(_config) {
   });
 
   bs.emitter.on( 'service:running', function ( obj ) {
-    process.send( 'Server has started' );
     process.send( 'P5_EVENT_URL' + obj.url );
   });
 

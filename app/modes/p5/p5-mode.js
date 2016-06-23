@@ -128,6 +128,7 @@ module.exports = {
       if ( m.slice(0,8) === 'P5_EVENT' ) {
         if ( m.indexOf( 'P5_EVENT_URL' ) === 0 ) {
           document.getElementById('viewer-iframe').src = m.split('P5_EVENT_URL').join('');
+          $('#project-url').text( m.split('P5_EVENT_URL').join('') );
         }
       } else {
         $('#debug').prepend( '<div>' + m + '</div>');
@@ -136,10 +137,16 @@ module.exports = {
   },
 
   stop: function() {
-    // if (nodeGlobal.serialRunning) {
-    //   p5serial.stop();
-    //   nodeGlobal.serialRunning = false;
-    // }
+    if (nodeGlobal.serialRunning) {
+     p5serial.stop();
+     nodeGlobal.serialRunning = false;
+    }
+
+    if( this.child ) {
+      this.child.kill('SIGHUP');
+      this.child = null;
+    }
+
     if (this.outputWindow) {
       this.outputWindow.close();
     } else {
