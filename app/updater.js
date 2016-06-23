@@ -5,6 +5,9 @@ var packageURL = 'https://raw.githubusercontent.com/processing/p5.js-editor/mast
 var downloadURL = 'https://github.com/processing/p5.js-editor/releases/download/';
 
 module.exports.check = function() {
+
+  return false;
+
   if (nodeGlobal.checkedUpdate === true) return false;
   nodeGlobal.checkedUpdate = true;
   $.ajax({url: packageURL, success: update, cache: false, dataType: 'json'});
