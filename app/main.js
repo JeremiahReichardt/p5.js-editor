@@ -166,6 +166,10 @@ var appConfig = {
             windowstate.save(self, win);
           }
 
+          if( this.child ) {
+            this.child.kill('SIGHUP');
+            this.child = null;
+          }
           windowstate.decrementWindows();
           if (windowstate.totalWindows() < 1) {
             gui.App.quit();

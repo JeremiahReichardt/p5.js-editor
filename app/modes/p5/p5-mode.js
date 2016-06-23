@@ -115,7 +115,7 @@ module.exports = {
     gui.App.clearCache(); // TODO: what does this do?
 
     // create the child process
-    this.child = cp.fork(Path.join('mode_assets', 'gulpfile.js'), [], {});
+    gui.Window.get().child = this.child = cp.fork(Path.join('mode_assets', 'gulpfile.js'), [], {});
 
     // send it a config object to start
     this.child.send({
