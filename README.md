@@ -12,14 +12,12 @@ The p5.js Editor is a simple coding environment designed for new programmers to 
 ### Features
 * Code editor with syntax highlighting that supports javascript, p5.js syntax, html and css.
 * Creates and manages p5.js project folders
-* Automatically updates new releases of p5.js and add-on libraries
 * Runs sketches inside the editor or in the browser
 * Starts a local server for the user
 * Provides a real logging console
 
 ### Future Plans
 * Integrated p5.js documentation
-* Server URL displayed for external browsers
 * Hiding of preview panel
 * Various key commands such as switching tabs, or closing current tab
 
