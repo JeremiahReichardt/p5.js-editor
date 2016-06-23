@@ -1,7 +1,7 @@
 ## This fork intends to...
 * Add browserify because 'Browserify lets you `require('modules')` in the browser by bundling up all of your dependencies.' - [browserify.org](http://browserify.org/). Or allows easy use of more than one javascript file.
 * Use Browsersync because 'Time-saving synchronised browser testing.' - [browsersync.io](https://www.browsersync.io/) Live editing / reloading of code.
-* View your sketch next to your code, no need to another window.
+* View your sketch next to your code, no need for another window.
 
 ## p5.js Editor: a code editor designed for p5.js
 
