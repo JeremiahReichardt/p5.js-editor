@@ -22,7 +22,7 @@ var builderOptions = {
   buildType: 'versioned',
   files: [ './public/**'],
   buildDir: './dist',
-  platforms: ['osx64'],
+  platforms: ['osx64', 'win64'],
   macIcns: './icons/p5js.icns',
   macPlist: {
     'CFBundleDocumentTypes':[
