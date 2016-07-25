@@ -39,7 +39,10 @@ process.on('message', function(_config) {
     process.send( 'P5_EVENT_URL' + obj.url );
   });
 
-  var watcher = gulp.watch( Path.join( config.base, '**/*' ), ['scripts-app'] );
+  var pathGood = Path.join( config.base, '**/*.*' );
+  var pathBad = Path.join( '!' + config.base, 'build/**/*' );
+
+  var watcher = gulp.watch( [pathGood, pathBad], ['scripts-app'] );
   watcher.on( 'change', function( event ) {
     process.send( 'File ' + event.path + ' was ' + event.type + ', running tasks...' );
   });
@@ -55,8 +58,8 @@ function bundle() {
       .pipe( source('sketch.build.js') )
       .pipe( buffer() )
       .pipe( sourcemaps.init({loadMaps: true}) )
-      .pipe( sourcemaps.write('./') )
-      .pipe( gulp.dest(config.base) )
+      .pipe( sourcemaps.write( Path.join(config.base, 'build/') ) )
+      .pipe( gulp.dest( Path.join(config.base, 'build') ) )
       .pipe( bs.stream() );
   };
   bundler.on( 'update', rebundle );
